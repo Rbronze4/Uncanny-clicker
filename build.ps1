@@ -5,15 +5,15 @@ Set-Location $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw "Windows x64 Python が必要です。" }
 & $Python -m pytest
 if ($LASTEXITCODE -ne 0) { throw "テストが失敗しました。" }
-& $Python -m PyInstaller --noconfirm --clean --onedir --windowed --name UncannyClicker --distpath $DistPath --paths src --collect-all customtkinter --manifest assets/app.manifest launcher.py
+& $Python -m PyInstaller --noconfirm --clean --onedir --windowed --name UncannyClicker --distpath $DistPath --paths src --collect-all customtkinter --manifest app.manifest launcher.py
 if ($LASTEXITCODE -ne 0) { throw "ビルドが失敗しました。" }
 Copy-Item README.md "$DistPath/UncannyClicker/README.md"
 Copy-Item THIRD_PARTY_NOTICES.md "$DistPath/UncannyClicker/THIRD_PARTY_NOTICES.md"
 Copy-Item LICENSE "$DistPath/UncannyClicker/LICENSE"
 Copy-Item docs -Destination "$DistPath/UncannyClicker/docs" -Recurse -Force
-& $Python tools/collect_licenses.py "$DistPath/UncannyClicker/licenses"
+& $Python collect_licenses.py "$DistPath/UncannyClicker/licenses"
 if ($LASTEXITCODE -ne 0) { throw "ライセンスの収集に失敗しました。" }
-Compress-Archive -Path "$DistPath/UncannyClicker" -DestinationPath "$DistPath/UncannyClicker-v1.0.0-win64.zip" -Force
-$hash = Get-FileHash "$DistPath/UncannyClicker-v1.0.0-win64.zip" -Algorithm SHA256
-"$($hash.Hash)  UncannyClicker-v1.0.0-win64.zip" | Set-Content -Encoding ascii "$DistPath/SHA256SUMS.txt"
+Compress-Archive -Path "$DistPath/UncannyClicker" -DestinationPath "$DistPath/UncannyClicker.zip" -Force
+$hash = Get-FileHash "$DistPath/UncannyClicker.zip" -Algorithm SHA256
+"$($hash.Hash)  UncannyClicker.zip" | Set-Content -Encoding ascii "$DistPath/SHA256SUMS.txt"
 $hash
