@@ -2,8 +2,6 @@
 
 Uncanny Clickerは、Windows向けの日本語自動クリックアプリです。Pythonのインストールやコマンド入力は不要です。アカウント登録は必要なく、インターネットに接続せずに使えます。
 
-[ダウンロード（GitHub Releases）](https://github.com/Rbronze4/Uncanny-clicker/releases) · [不具合を報告](https://github.com/Rbronze4/Uncanny-clicker/issues)
-
 ## できること
 
 - マウスで選んだ位置、または入力した座標を繰り返し左クリック
